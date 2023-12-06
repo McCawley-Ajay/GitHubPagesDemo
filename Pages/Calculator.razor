@@ -1,0 +1,66 @@
+@page "/Calculator"
+@rendermode InteractiveServer
+
+<div style="height: 75px; border-bottom: 2px solid black; display: flex; justify-content: center; align-items: center; background-color: #f8f9fa;">
+    <a href="" style="text-decoration: none; color: black; font-size: 1.5em; padding: 10px; margin-right: 20px;">Home</a>
+    <a href="counter" style="text-decoration: none; color: black; font-size: 1.5em; padding: 10px; margin-right: 20px;">Counter</a>
+    <a href="calculator" style="text-decoration: none; color: black; font-size: 1.5em; padding: 10px; margin-right: 20px;">Calculator</a>
+    <a href="LocalStorage" style="text-decoration: none; color: black; font-size: 1.5em; padding: 10px; margin-right: 20px;">Local Storage</a>
+</div>
+
+<h3>Simple Calculator</h3>
+
+<div>
+    <input @bind="firstNumber" type="number" placeholder="Enter the first number" />
+</div>
+<div>
+    <select @bind="selectedOperator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+</div>
+<div>
+    <input @bind="secondNumber" type="number" placeholder="Enter the second number" />
+</div>
+<div>
+    <button @onclick="Calculate">Calculate</button>
+</div>
+<div>
+    <h4>Result: @result</h4>
+</div>
+
+@code {
+    private double firstNumber;
+    private double secondNumber;
+    private string selectedOperator = "+";
+    private double result;
+
+    private void Calculate()
+    {
+        switch (selectedOperator)
+        {
+            case "+":
+                result = firstNumber + secondNumber;
+                break;
+            case "-":
+                result = firstNumber - secondNumber;
+                break;
+            case "*":
+                result = firstNumber * secondNumber;
+                break;
+            case "/":
+                if (secondNumber != 0)
+                {
+                    result = firstNumber / secondNumber;
+                }
+                else
+                {
+                    result = double.NaN; // Handle division by zero
+                }
+                break;
+        }
+    }
+}
+    
